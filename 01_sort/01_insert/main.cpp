@@ -24,7 +24,7 @@ int main(int argc, char **argv)
     if (argc > 1 && std::string(argv[1]) == "--memcheck")
     {
         std::vector<int> arr = { 5, 4, 0, 2, -1, 4 };
-        sort_insert(arr, cmp_int_larger);
+        sort_insert(arr);
         return 0;
     }
     int n = 0;
@@ -43,7 +43,7 @@ int main(int argc, char **argv)
     std::cout << "Source array: " << std::endl;
     print_array<int>(arr);
 
-    sort_insert(arr, cmp_int_larger);
+    sort_insert(arr);
     std::cout << "Sorted array: " << std::endl;
     print_array(arr);
 
