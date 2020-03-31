@@ -21,7 +21,7 @@ void print_array(std::vector<T> &arr)
 
 int main(int argc, char **argv)
 {
-    if (argc > 1 && std::string(argv[1]) == "-memcheck")
+    if (argc > 1 && std::string(argv[1]) == "--memcheck")
     {
         std::vector<int> arr = { 5, 4, 0, 2, -1, 4 };
         sort_insert(arr, cmp_int_larger);
