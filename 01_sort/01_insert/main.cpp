@@ -1,6 +1,8 @@
 #include <iostream>
 #include <vector>
 
+#include "sort.hpp"
+
 template <typename  T>
 void input_array(std::vector<T> &arr)
 {
@@ -33,6 +35,10 @@ int main(int argc, char **argv)
     
     std::cout << "Source array: " << std::endl;
     print_array<int>(arr);
+
+    sort_insert(arr, cmp_int_larger);
+    std::cout << "Sorted array: " << std::endl;
+    print_array(arr);
 
     return 0;
 }
