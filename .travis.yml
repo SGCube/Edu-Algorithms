@@ -13,9 +13,7 @@ language: cpp
 env:
     - TARGET_DIR=$CI_COMMIT_REF_NAME
 
-jobs:
-  include:
-    before_install:
+before_install:
     - sudo apt update
     - sudo apt install cppcheck
     - sudo apt install valgrind
@@ -26,14 +24,19 @@ jobs:
     - sudo make
     - sudo cp *.a /usr/lib
     - cd -
-    - cd $TARGET_DIR
-    
+    - ls
+
+before_script:
+  - cd $TARGET_DIR
+
+jobs:
+  include:
     stage: codestyle
-    before_script:
-    - cppcheck --std=c++11 -q --enable=all --error-exitcode=1 
+    script:
+    - cppcheck --std=c++11 -q --enable=all --error-exitcode=1 .
     
     stage: build
-    before_script:
+    script:
     - cmake CMakeLists.txt
     - make
 
@@ -41,6 +44,5 @@ jobs:
     script: valgrind --tool=memcheck --leak-check=full -q ./app.exe -memcheck
     
     stage: test
-    script: ctest --output-on-failure
-            
+    script: ctest --output-on-failure    
     after_script: make clean
