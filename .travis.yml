@@ -33,7 +33,7 @@ before_script:
 
 stages:
   - codestyle
-  - complile
+  - build
   - memcheck
   - test
 
@@ -42,7 +42,7 @@ jobs:
     - stage: codestyle
       script: cppcheck --std=c++11 -q --enable=all --error-exitcode=1 .
     
-    - stage: compile
+    - stage: build
       script:
       - cmake CMakeLists.txt
       - make
