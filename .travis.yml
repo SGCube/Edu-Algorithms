@@ -6,13 +6,13 @@ addons:
     - cppcheck
     - valgrind
 
+language: cpp
+
 stages:
   - codestyle
   - build
   - memcheck
   - test
-
-language: cpp
 
 before_install:
     - sudo apt install libgtest-dev
@@ -21,12 +21,6 @@ before_install:
     - sudo make
     - sudo cp *.a /usr/lib
     - cd -
-
-stages:
-  - codestyle
-  - build
-  - memcheck
-  - test
 
 before_script:
   - cmake CMakeLists.txt
