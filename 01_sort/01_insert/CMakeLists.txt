@@ -8,8 +8,8 @@ enable_testing()
 find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS})
 
-add_executable(lab_01 main.cpp)
+add_executable(app.exe main.cpp)
 
-add_executable(test_01 test.cpp)
-target_link_libraries(test_01 GTest::GTest GTest::Main)
-add_test(NAME Lab01Tests COMMAND test_01)
+add_executable(test.exe test.cpp)
+target_link_libraries(test.exe GTest::GTest GTest::Main)
+add_test(NAME SortTests COMMAND test.exe)
