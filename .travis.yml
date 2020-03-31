@@ -44,7 +44,7 @@ jobs:
 
     - stage: memcheck
       if: branch!=master
-      script: valgrind --tool=memcheck --leak-check=full -q ./${TARGET_DIR}/app.exe -memcheck
+      script: ./memcheck.sh
     
     - stage: test
       script: ctest --output-on-failure    
