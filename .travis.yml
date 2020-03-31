@@ -16,7 +16,6 @@ language: cpp
 
 env:
     - TARGET_DIR=${TRAVIS_BRANCH}
-    - DEV=dev
 
 before_install:
     - sudo apt install libgtest-dev
@@ -27,10 +26,6 @@ before_install:
     - cd -
     - ls
 
-before_script:
-  - cmake CMakeLists.txt
-  - make
-
 stages:
   - codestyle
   - build
@@ -40,19 +35,15 @@ stages:
 jobs:
   include:
     - stage: codestyle
-      script: cppcheck --std=c++11 -q --enable=all --error-exitcode=1 .
+      script: cppcheck --std=c++11 -q --enable=all --error-exitcode=1 ./${TARGET_DIR}
     
     - stage: build
       script: cmake CMakeLists.txt && make
 
     - stage: memcheck
-      env: DEV=dev
+      if: branch=master
       script: valgrind --tool=memcheck --leak-check=full -q ./${TARGET_DIR}/app.exe -memcheck
     
     - stage: test
       script: ctest --output-on-failure    
       after_script: make clean
-
-  exclude:
-    - if: branch = master
-      env: DEV=dev
