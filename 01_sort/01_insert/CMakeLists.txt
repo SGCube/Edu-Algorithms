@@ -11,5 +11,5 @@ include_directories(${GTEST_INCLUDE_DIRS})
 add_executable(app.exe main.cpp sort.cpp)
 
 add_executable(test.exe test.cpp sort.cpp)
-target_link_libraries(test.exe GTest::GTest GTest::Main)
+target_link_libraries(test.exe ${GTEST_LIBRARIES})
 add_test(NAME SortTests COMMAND test.exe)
