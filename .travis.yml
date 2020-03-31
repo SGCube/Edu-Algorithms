@@ -15,13 +15,9 @@ stages:
 language: cpp
 
 env:
-    - TARGET_DIR=${TRAVIS_BRANCH}
-      if: branch!=master
-    - TARGET_DIR=.
-      if: branch=master
+  - TARGET_DIR=${TRAVIS_BRANCH}
 
 before_install:
-    - chmod +x ./${TARGET_DIR}/memcheck.sh
     - sudo apt install libgtest-dev
     - cd /usr/src/gtest
     - sudo cmake CMakeLists.txt
@@ -35,8 +31,11 @@ stages:
   - memcheck
   - test
 
+if: branch!=master
+before_script: cd ${TARGET_DIR}
+
 before_script:
-  - cd ${TARGET_DIR}
+  - chmod +x ./memcheck.sh
   - cmake CMakeLists.txt
   - make
 
