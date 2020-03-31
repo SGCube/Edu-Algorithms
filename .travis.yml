@@ -15,10 +15,10 @@ stages:
 language: cpp
 
 env:
-    - if: branch!=master
-      - TARGET_DIR=${TRAVIS_BRANCH}
-    - if: branch=master
-      - TARGET_DIR=.
+    - TARGET_DIR=${TRAVIS_BRANCH}
+      if: branch!=master
+    - TARGET_DIR=.
+      if: branch=master
 
 before_install:
     - chmod +x ./${TARGET_DIR}/memcheck.sh
