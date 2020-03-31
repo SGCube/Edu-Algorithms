@@ -1,0 +1,41 @@
+addons:
+  apt:
+    update: true
+    packages:
+    - cmake
+    - cppcheck
+    - valgrind
+
+language: cpp
+
+stages:
+  - codestyle
+  - build
+  - memcheck
+  - test
+
+before_install:
+    - sudo apt install libgtest-dev
+    - cd /usr/src/gtest
+    - sudo cmake CMakeLists.txt
+    - sudo make
+    - sudo cp *.a /usr/lib
+    - cd -
+
+before_script:
+  - cmake CMakeLists.txt
+  - make
+
+jobs:
+  include:
+    - stage: codestyle
+      before_script: skip
+      script: cppcheck --std=c++11 --enable=all -q --error-exitcode=1 .
+
+    - stage: memcheck
+      if: branch!=master AND branch!=ci-setup
+      script: cd ${TRAVIS_BRANCH} && chmod +x ./memcheck.sh && ./memcheck.sh
+    
+    - stage: test
+      script: ctest --output-on-failure    
+      after_script: make clean
