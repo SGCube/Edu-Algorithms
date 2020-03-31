@@ -15,7 +15,7 @@ stages:
 language: cpp
 
 env:
-    - TARGET_DIR=$CI_COMMIT_REF_NAME
+    - TARGET_DIR=${TRAVIS_BRANCH}
 
 before_install:
     - sudo apt install libgtest-dev
@@ -27,7 +27,6 @@ before_install:
     - ls
 
 before_script:
-  - cd $TARGET_DIR
   - cmake CMakeLists.txt
   - make
 
@@ -35,6 +34,7 @@ stages:
   - codestyle
   - build
   - memcheck
+    if: branch != master
   - test
 
 jobs:
@@ -43,12 +43,10 @@ jobs:
       script: cppcheck --std=c++11 -q --enable=all --error-exitcode=1 .
     
     - stage: build
-      script:
-      - cmake CMakeLists.txt
-      - make
+      script: cmake CMakeLists.txt && make
 
     - stage: memcheck
-      script: valgrind --tool=memcheck --leak-check=full -q ./app.exe -memcheck
+      script: valgrind --tool=memcheck --leak-check=full -q ./${TARGET_DIR}/app.exe -memcheck
     
     - stage: test
       script: ctest --output-on-failure    
