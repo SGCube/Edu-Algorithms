@@ -8,13 +8,6 @@ addons:
 
 language: cpp
 
-stages:
-  - codestyle
-  - build
-  - name: memcheck
-    if: branch!=master
-  - test
-
 before_install:
     - sudo apt install libgtest-dev
     - cd /usr/src/gtest
@@ -39,3 +32,10 @@ jobs:
     - stage: test
       script: ctest --output-on-failure    
       after_script: make clean
+      
+stages:
+  - codestyle
+  - name: memcheck
+    if: branch != master
+  - test
+
