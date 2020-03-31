@@ -12,6 +12,7 @@ stages:
   - codestyle
   - build
   - memcheck
+    if: branch!=master
   - test
 
 before_install:
@@ -33,7 +34,6 @@ jobs:
       script: cppcheck --std=c++11 --enable=all -q --error-exitcode=1 .
 
     - stage: memcheck
-      if: branch!=master
       script: cd ${TRAVIS_BRANCH} && chmod +x ./memcheck.sh && ./memcheck.sh
     
     - stage: test
