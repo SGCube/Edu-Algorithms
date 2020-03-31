@@ -20,6 +20,15 @@ void print_array(std::vector<T> &arr)
 
 int main(int argc, char **argv)
 {
+    if (argc > 1)
+    {
+        if (argv[1] == "--memcheck")
+        {
+            std::vector<int> arr = { 5, 4, 0, 2, -1, 4 };
+            sort_insert(arr, cmp_int_larger);
+            return 0;
+        }
+    }
     int n = 0;
     std::cout << "Enter size of array: " << std::endl;
     std::cin >> n;
