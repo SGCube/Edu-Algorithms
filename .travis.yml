@@ -14,9 +14,6 @@ stages:
 
 language: cpp
 
-env:
-  - TARGET_DIR=${TRAVIS_BRANCH}
-
 before_install:
     - sudo apt install libgtest-dev
     - cd /usr/src/gtest
@@ -43,7 +40,7 @@ jobs:
 
     - stage: memcheck
       if: branch!=master
-      script: chmod +x ./memcheck.sh && ./memcheck.sh
+      script: chmod +x ./${TRAVIS_BRANCH}/memcheck.sh && ./${TRAVIS_BRANCH}/memcheck.sh
     
     - stage: test
       script: ctest --output-on-failure    
