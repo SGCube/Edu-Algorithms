@@ -40,7 +40,7 @@ jobs:
 
     - stage: memcheck
       if: branch!=master
-      script: chmod +x ./${TRAVIS_BRANCH}/memcheck.sh && ./${TRAVIS_BRANCH}/memcheck.sh
+      script: cd ${TRAVIS_BRANCH} && chmod +x ./memcheck.sh && ./memcheck.sh
     
     - stage: test
       script: ctest --output-on-failure    
