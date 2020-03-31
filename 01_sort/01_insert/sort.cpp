@@ -6,7 +6,7 @@ void sort_insert(std::vector<int> &arr, bool desc)
 {
     for (size_t i = 0; i < arr.size(); i++)
     {
-        T tmp = arr[i];
+        int tmp = arr[i];
         int j = i - 1;
         while (j >= 0 && (desc && tmp > arr[j] || !desc && tmp < arr[j]))
         {
