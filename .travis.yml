@@ -1,0 +1,46 @@
+addons:
+apt:
+update: true
+
+stages:
+  - codestyle
+  - build
+  - memcheck
+  - test
+
+language: cpp
+
+env:
+    - TARGET_DIR=$CI_COMMIT_REF_NAME
+
+jobs:
+  include:
+    before_install:
+    - sudo apt update
+    - sudo apt install cppcheck
+    - sudo apt install valgrind
+    - sudo apt install cmake
+    - sudo apt install libgtest-dev
+    - cd /usr/src/gtest
+    - sudo cmake CMakeLists.txt
+    - sudo make
+    - sudo cp *.a /usr/lib
+    - cd -
+    - cd $TARGET_DIR
+    
+    stage: codestyle
+    before_script:
+    - cppcheck --std=c++11 -q --enable=all --error-exitcode=1 
+    
+    stage: build
+    before_script:
+    - cmake CMakeLists.txt
+    - make
+
+    stage: memcheck
+    script: valgrind --tool=memcheck --leak-check=full -q ./app.exe -memcheck
+    
+    stage: test
+    script: ctest --output-on-failure
+            
+    after_script: make clean
