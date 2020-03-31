@@ -33,7 +33,7 @@ jobs:
       script: cppcheck --std=c++11 --enable=all -q --error-exitcode=1 .
 
     - stage: memcheck
-      if: branch!=master
+      if: branch!=master AND branch!=ci-setup
       script: cd ${TRAVIS_BRANCH} && chmod +x ./memcheck.sh && ./memcheck.sh
     
     - stage: test
