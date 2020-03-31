@@ -11,7 +11,7 @@ language: cpp
 stages:
   - codestyle
   - build
-  - memcheck
+  - name: memcheck
     if: branch!=master
   - test
 
