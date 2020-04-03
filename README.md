@@ -3,7 +3,7 @@
 
 ## [Алгоритмы сортировки](./01_sort) [![Build Status](https://travis-ci.org/SGCube/Edu-Algorithms.svg?branch=01_sort)](https://travis-ci.org/SGCube/Edu-Algorithms)
 
-|Алгоритм|Файл|Частный|Универсальный|
+|Алгоритм|Файл|Частный|«Универсальный»|
 |--------|--------------|-------|-------------|
 |Сортировка вставками|[01_insert.hpp](./01_sort/01_insert.hpp)|✔️|✔️|
 |Сортировка Шелла|[02_shell.hpp](./01_sort/02_shell.hpp)|❌|❌|
