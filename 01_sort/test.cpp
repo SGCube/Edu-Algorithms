@@ -1,184 +1,62 @@
 #include "gtest/gtest.h"
-#include "sort.h"
+#include "sort.hpp"
+#include "cmp.hpp"
 
-/// INT
-
-TEST(InsertSort, OneElement)
+class SortTest : public ::testing::Test
 {
-    std::vector<int> source = { 1 };
-    std::vector<int> sorted = { 1 };
-    sort_insert(source);
-    ASSERT_TRUE(source == sorted);
-}
+protected:
+	void SetUp() {}
+	void TearDown() {}
+    
+	std::vector<std::vector<int>> source = {
+        { 1 },
+        { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 },
+        { 9, 8, 7, 6, 5, 4, 3, 2, 1, 0 },
+        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+        { 5, 4, 0, 2, -1, 4 },
+        { 5, 4, 0, 2, -1, 3 }
+    };
+    std::vector<std::vector<int>> sorted = {
+        { 1 },
+        { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 },
+        { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 },
+        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+        { -1, 0, 2, 4, 4, 5 },
+        { -1, 0, 2, 3, 4, 5 }
+    };
+    std::vector<float> source_f = { 5.4, -4.2, 0.1, 0, 0.15, 3 };
+    std::vector<float> sorted_f = { -4.2, 0, 0.1, 0.15, 3, 5.4 };
 
-TEST(InsertSort, AlreadySorted)
+    std::array<int, 6> source_a[] = { 5, 4, 0, 2, -1, 4 };
+    std::array<int, 6> sorted_a[] = { -1, 0, 2, 4, 4, 5 };
+
+    int source_ptr[] = { 5, 4, 0, 2, -1, 4 };
+    int sorted_ptr[] = { -1, 0, 2, 4, 4, 5 };
+    
+};
+
+TEST(SortTest, InsertSort)
 {
-    std::vector<int> source = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-    std::vector<int> sorted = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-    sort_insert(source);
-    ASSERT_TRUE(source == sorted);
-}
-
-TEST(InsertSort, InverseSorted)
-{
-    std::vector<int> source = { 9, 8, 7, 6, 5, 4, 3, 2, 1, 0 };
-    std::vector<int> sorted = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-    sort_insert(source);
-    ASSERT_TRUE(source == sorted);
-}
-
-TEST(InsertSort, AllSame)
-{
-    std::vector<int> source = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
-    std::vector<int> sorted = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
-    sort_insert(source);
-    ASSERT_TRUE(source == sorted);
-}
-
-TEST(InsertSort, SomeSame)
-{
-    std::vector<int> source = { 5, 4, 0, 2, -1, 4 };
-    std::vector<int> sorted = { -1, 0, 2, 4, 4, 5 };
-    sort_insert(source);
-    ASSERT_TRUE(source == sorted);
-}
-
-TEST(InsertSort, NoSame)
-{
-    std::vector<int> source = { 5, 4, 0, 2, -1, 3 };
-    std::vector<int> sorted = { -1, 0, 2, 3, 4, 5 };
-    sort_insert(source);
-    ASSERT_TRUE(source == sorted);
-}
-
-/// UNIVERSAL
-
-TEST(InsertSortUni, OneElement)
-{
-    std::vector<int> source = { 1 };
-    std::vector<int> sorted = { 1 };
-    sort_insert_uni(source.begin(), source.end(), cmp<int>);
-    ASSERT_TRUE(source == sorted);
-}
-
-TEST(InsertSortUni, AlreadySorted)
-{
-    std::vector<int> source = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-    std::vector<int> sorted = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-    sort_insert_uni(source.begin(), source.end(), cmp<int>);
-    ASSERT_TRUE(source == sorted);
-}
-
-TEST(InsertSortUni, InverseSorted)
-{
-    std::vector<int> source = { 9, 8, 7, 6, 5, 4, 3, 2, 1, 0 };
-    std::vector<int> sorted = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-    sort_insert_uni(source.begin(), source.end(), cmp<int>);
-    ASSERT_TRUE(source == sorted);
-}
-
-TEST(InsertSortUni, AllSame)
-{
-    std::vector<int> source = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
-    std::vector<int> sorted = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
-    sort_insert_uni(source.begin(), source.end(), cmp<int>);
-    ASSERT_TRUE(source == sorted);
-}
-
-TEST(InsertSortUni, SomeSame)
-{
-    std::vector<int> source = { 5, 4, 0, 2, -1, 4 };
-    std::vector<int> sorted = { -1, 0, 2, 4, 4, 5 };
-    sort_insert_uni(source.begin(), source.end(), cmp<int>);
-    ASSERT_TRUE(source == sorted);
-}
-
-TEST(InsertSortUni, NoSame)
-{
-    std::vector<int> source = { 5, 4, 0, 2, -1, 3 };
-    std::vector<int> sorted = { -1, 0, 2, 3, 4, 5 };
-    sort_insert_uni(source.begin(), source.end(), cmp<int>);
-    ASSERT_TRUE(source == sorted);
-}
-
-TEST(InsertSortUni, FloatType)
-{
-    std::vector<float> source = { 5.4, -4.2, 0.1, 0, 0.15, 3 };
-    std::vector<float> sorted = { -4.2, 0, 0.1, 0.15, 3, 5.4 };
-    sort_insert_uni(source.begin(), source.end(), cmp<int>);
-    ASSERT_TRUE(source == sorted);
-}
-
-TEST(InsertSortUni, ArrayContainer)
-{
-    std::array<int, 6> source = { 5, 4, 0, 2, -1, 3 };
-    std::array<int, 6> sorted = { -1, 0, 2, 3, 4, 5 };
-    sort_insert_uni(source.begin(), source.end(), cmp<int>);
-    ASSERT_TRUE(source == sorted);
-}
-
-TEST(InsertSortUni, Pointers)
-{
-    int source[] = { 5, 4, 0, 2, -1, 3 };
-    int sorted[] = { -1, 0, 2, 3, 4, 5 };
-    sort_insert_uni(source, source + 6, cmp<int>);
-    bool result = true;
-    for (size_t i = 0; i < 6 && result; i++)
+    for (auto i = 0; i <= source.size(); i++)
     {
-        if (source[i] != sorted[i])
-            result = false;
+        std::vector<int> to_sort = source[i];
+        sort_insert(to_sort);
+        ASSERT_TRUE(to_sort == sorted[i]);
     }
-    ASSERT_TRUE(result);
-}
+    std::vector<float> to_sort_f = source_f;
+    sort_insert_uni(to_sort_f.begin(), to_sort_f.end(), cmp<float>);
+    ASSERT_TRUE(to_sort_f == sorted_f);
 
-/// INT
+    std::array<int, 6> to_sort_a = source_a;
+    sort_insert_uni(to_sort_a.begin(), to_sort_a.end(), cmp<int>);
+    ASSERT_TRUE(to_sort_a == sorted_a);
 
-TEST(ShellSort, OneElement)
-{
-    std::vector<int> source = { 1 };
-    std::vector<int> sorted = { 1 };
-    sort_shell(source);
-    ASSERT_TRUE(source == sorted);
-}
-
-TEST(ShellSort, AlreadySorted)
-{
-    std::vector<int> source = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-    std::vector<int> sorted = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-    sort_shell(source);
-    ASSERT_TRUE(source == sorted);
-}
-
-TEST(ShellSort, InverseSorted)
-{
-    std::vector<int> source = { 9, 8, 7, 6, 5, 4, 3, 2, 1, 0 };
-    std::vector<int> sorted = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-    sort_shell(source);
-    ASSERT_TRUE(source == sorted);
-}
-
-TEST(ShellSort, AllSame)
-{
-    std::vector<int> source = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
-    std::vector<int> sorted = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
-    sort_shell(source);
-    ASSERT_TRUE(source == sorted);
-}
-
-TEST(ShellSort, SomeSame)
-{
-    std::vector<int> source = { 5, 4, 0, 2, -1, 4 };
-    std::vector<int> sorted = { -1, 0, 2, 4, 4, 5 };
-    sort_shell(source);
-    ASSERT_TRUE(source == sorted);
-}
-
-TEST(ShellSort, NoSame)
-{
-    std::vector<int> source = { 5, 4, 0, 2, -1, 3 };
-    std::vector<int> sorted = { -1, 0, 2, 3, 4, 5 };
-    sort_shell(source);
-    ASSERT_TRUE(source == sorted);
+    int to_sort_ptr[6];
+    for (size_t i = 0; i < 6 && result; i++)
+        to_sort_ptr[i] = source_ptr[i];
+    sort_insert_uni(to_sort_ptr.begin(), to_sort_ptr.end(), cmp<int>);
+    for (size_t i = 0; i < 6 && result; i++)
+        ASSERT_TRUE(to_sort_ptr == sorted_ptr);
 }
 
 int main(int argc, char **argv)
