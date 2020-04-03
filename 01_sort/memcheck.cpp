@@ -17,6 +17,7 @@ int main(int argc, char **argv)
     sort_insert(to_sort);
     to_sort = arr;
     sort_insert_uni(arr.begin(), arr.end(), cmp<int>);
+    to_sort.clear();
 
     return 0;
 }
