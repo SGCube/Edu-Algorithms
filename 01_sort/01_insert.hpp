@@ -12,7 +12,6 @@ void sort_insert(std::vector<int> &arr)
     for (size_t i = 0; i < arr.size(); i++)
     {
         int tmp = arr[i];
-        int j = i - 1;
         for (int j = i - 1; j >= 0 && tmp < arr[j]; j--)
         {
             arr[j + 1] = arr[j];

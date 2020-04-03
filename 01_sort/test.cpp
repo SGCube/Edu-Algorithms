@@ -39,21 +39,21 @@ protected:
     for (auto i = 0; i <= source.size(); i++) \
     { \
         std::vector<int> to_sort = source[i]; \
-        sort(to_sort); \
+        (sort)(to_sort); \
         ASSERT_TRUE(to_sort == sorted[i]); \
     } \
     std::vector<float> to_sort_f = source_f; \
-    sort_uni(to_sort_f.begin(), to_sort_f.end(), cmp<float>); \
+    (sort_uni)(to_sort_f.begin(), to_sort_f.end(), cmp<float>); \
     ASSERT_TRUE(to_sort_f == sorted_f); \
     \
     std::array<int, 6> to_sort_a = source_a; \
-    sort_uni(to_sort_a.begin(), to_sort_a.end(), cmp<int>); \
+    (sort_uni)(to_sort_a.begin(), to_sort_a.end(), cmp<int>); \
     ASSERT_TRUE(to_sort_a == sorted_a); \
     \
     int to_sort_ptr[6]; \
     for (size_t i = 0; i < 6; i++) \
         to_sort_ptr[i] = source_ptr[i]; \
-    sort_uni(to_sort_ptr, to_sort_ptr + 6, cmp<int>); \
+    (sort_uni)(to_sort_ptr, to_sort_ptr + 6, cmp<int>); \
     for (size_t i = 0; i < 6; i++) \
         ASSERT_TRUE(to_sort_ptr == sorted_ptr); \
 
