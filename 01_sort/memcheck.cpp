@@ -19,5 +19,11 @@ int main(int argc, char **argv)
     sort_insert_uni(arr.begin(), arr.end(), cmp<int>);
     to_sort.clear();
 
+    /*to_sort = arr;
+    sort_shell(to_sort);
+    to_sort = arr;
+    sort_shell_uni(arr.begin(), arr.end(), cmp<int>);
+    to_sort.clear();*/
+
     return 0;
 }
