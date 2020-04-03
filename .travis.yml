@@ -27,7 +27,7 @@ jobs:
       script: cppcheck --std=c++11 --enable=all -q --error-exitcode=1 .
 
     - stage: memcheck
-      script: ls & cd ./${TRAVIS_BRANCH} & ls & valgrind --tool=memcheck --leak-check=full -q ./memcheck.exe
+      script: valgrind --tool=memcheck --leak-check=full -q ./${TRAVIS_BRANCH}/memcheck.exe
       after_script: make clean
     
     - stage: test
