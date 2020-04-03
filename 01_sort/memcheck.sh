@@ -1,1 +1,0 @@
-valgrind --tool=memcheck --leak-check=full -q ./01_insert/app.exe --memcheck
