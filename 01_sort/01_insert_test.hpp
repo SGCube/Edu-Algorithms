@@ -1,6 +1,10 @@
+#include <vector>
+#include <array>
+#include <list>
 #include "gtest/gtest.h"
-#include "01_insert.hpp"
 #include "cmp.hpp"
+
+#include "01_insert.hpp"
 
 /// INT
 
@@ -112,8 +116,8 @@ TEST(InsertSortUni, FloatType)
 
 TEST(InsertSortUni, ArrayContainer)
 {
-    std::array<int> source = { 5, 4, 0, 2, -1, 3 };
-    std::array<int> sorted = { -1, 0, 2, 3, 4, 5 };
+    std::array<int, 6> source = { 5, 4, 0, 2, -1, 3 };
+    std::array<int, 6> sorted = { -1, 0, 2, 3, 4, 5 };
     sort_insert_uni(source.begin(), source.end(), cmp<int>);
     ASSERT_TRUE(source == sorted);
 }
