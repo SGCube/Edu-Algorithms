@@ -1,8 +1,11 @@
+#ifndef __01_INSERT_HPP__
+#define __01_INSERT_HPP__
+
+#include <vector>
 #include <cstdlib>
-#include "sort.hpp"
 
 /// Сортировка вставками
-void sort_insert(std::vector<int> &arr, bool desc)
+void sort_insert(std::vector<int> &arr, bool desc=false)
 {
     for (size_t i = 0; i < arr.size(); i++)
     {
@@ -16,3 +19,5 @@ void sort_insert(std::vector<int> &arr, bool desc)
         }
     }
 }
+
+#endif // __01_INSERT_HPP__
