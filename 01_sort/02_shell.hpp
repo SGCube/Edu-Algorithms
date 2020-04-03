@@ -14,35 +14,34 @@ void sort_shell(std::vector<int> &arr)
         for (size_t i = d; i < arr.size(); i += d)
         {
             int tmp = arr[i];
-            int j = i - d;
-            while (j >= d && tmp < arr[j])
+            for (int j = i - d; j >= 0 && tmp < arr[j]; j -= d)
             {
                 arr[j + d] = arr[j];
                 arr[j] = tmp;
-                j -= d;
             }
         }
     }
 }
 
 // Универсальный
-/*template <class Iter, class Comp>
-void sort_insert_uni(Iter first, Iter last, Comp cmp)
+template <class Iter, class Comp>
+void sort_shell_uni(Iter first, Iter last, Comp cmp)
 {
     if (first == last)
         return;
 
-    for (Iter _i = first + 1; _i != last; _i++)
+    for (auto d = last - first; d > 0; d >>= 1)
     {
-        auto tmp = *_i;
-        Iter _j = _i - 1;
-        while (_j != first - 1 && cmp(tmp, *_j))
+        for (Iter _i = first + d; _i != last; _i += d)
         {
-            *(_j + 1) = *_j;
-            *_j = tmp;
-            _j--;
+            auto tmp = *_i;
+            for(Iter _j = _i - d; _j - first >= 0 && cmp(tmp, *_j); _j -= d)
+            {
+                *(_j + d) = *_j;
+                *_j = tmp;
+            }
         }
     }
-}*/
+}
 
 #endif // __02_SHELL_HPP__

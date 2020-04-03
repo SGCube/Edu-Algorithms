@@ -46,7 +46,7 @@ int main(int argc, char **argv)
 
     std::cout << "Shell:\t";
     to_sort = arr;
-    sort_shell(to_sort);
+    sort_shell_uni(to_sort.begin(), to_sort.end(), cmp<int>);
     output(to_sort.begin(), to_sort.end());
 
     return 0;

@@ -13,11 +13,10 @@ void sort_insert(std::vector<int> &arr)
     {
         int tmp = arr[i];
         int j = i - 1;
-        while (j >= 0 && tmp < arr[j])
+        for (int j = i - 1; j >= 0 && tmp < arr[j]; j--)
         {
             arr[j + 1] = arr[j];
             arr[j] = tmp;
-            j--;
         }
     }
 }
@@ -32,12 +31,10 @@ void sort_insert_uni(Iter first, Iter last, Comp cmp)
     for (Iter _i = first + 1; _i != last; _i++)
     {
         auto tmp = *_i;
-        Iter _j = _i - 1;
-        while (_j != first - 1 && cmp(tmp, *_j))
+        for(Iter _j = _i - 1; _j - first >= 0 && cmp(tmp, *_j); _j--)
         {
             *(_j + 1) = *_j;
             *_j = tmp;
-            _j--;
         }
     }
 }

@@ -35,28 +35,36 @@ protected:
     
 };
 
-TEST(SortTest, InsertSort)
+#define SORT_TEST(sort, sort_uni) \
+    for (auto i = 0; i <= source.size(); i++) \
+    { \
+        std::vector<int> to_sort = source[i]; \
+        sort(to_sort); \
+        ASSERT_TRUE(to_sort == sorted[i]); \
+    } \
+    std::vector<float> to_sort_f = source_f; \
+    sort_uni(to_sort_f.begin(), to_sort_f.end(), cmp<float>); \
+    ASSERT_TRUE(to_sort_f == sorted_f); \
+    \
+    std::array<int, 6> to_sort_a = source_a; \
+    sort_uni(to_sort_a.begin(), to_sort_a.end(), cmp<int>); \
+    ASSERT_TRUE(to_sort_a == sorted_a); \
+    \
+    int to_sort_ptr[6]; \
+    for (size_t i = 0; i < 6; i++) \
+        to_sort_ptr[i] = source_ptr[i]; \
+    sort_uni(to_sort_ptr, to_sort_ptr + 6, cmp<int>); \
+    for (size_t i = 0; i < 6; i++) \
+        ASSERT_TRUE(to_sort_ptr == sorted_ptr); \
+
+TEST_F(SortTest, InsertSort)
 {
-    for (auto i = 0; i <= source.size(); i++)
-    {
-        std::vector<int> to_sort = source[i];
-        sort_insert(to_sort);
-        ASSERT_TRUE(to_sort == sorted[i]);
-    }
-    std::vector<float> to_sort_f = source_f;
-    sort_insert_uni(to_sort_f.begin(), to_sort_f.end(), cmp<float>);
-    ASSERT_TRUE(to_sort_f == sorted_f);
+    SORT_TEST(sort_insert, sort_insert_uni);
+}
 
-    std::array<int, 6> to_sort_a = source_a;
-    sort_insert_uni(to_sort_a.begin(), to_sort_a.end(), cmp<int>);
-    ASSERT_TRUE(to_sort_a == sorted_a);
-
-    int to_sort_ptr[6];
-    for (size_t i = 0; i < 6 && result; i++)
-        to_sort_ptr[i] = source_ptr[i];
-    sort_insert_uni(to_sort_ptr.begin(), to_sort_ptr.end(), cmp<int>);
-    for (size_t i = 0; i < 6 && result; i++)
-        ASSERT_TRUE(to_sort_ptr == sorted_ptr);
+TEST_F(SortTest, ShellSort)
+{
+    SORT_TEST(sort_shell, sort_shell_uni);
 }
 
 int main(int argc, char **argv)
