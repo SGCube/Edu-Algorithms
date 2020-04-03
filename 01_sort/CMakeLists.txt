@@ -10,8 +10,8 @@ enable_testing()
 find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS})
 
-add_executable(app.exe main.cpp sort.cpp)
+add_executable(app.exe main.cpp)
 
-add_executable(test.exe test.cpp sort.cpp)
+add_executable(test.exe test.cpp)
 target_link_libraries(test.exe GTest::GTest GTest::Main)
 gtest_add_tests(TARGET test.exe)
