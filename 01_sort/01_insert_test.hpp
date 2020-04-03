@@ -122,10 +122,16 @@ TEST(InsertSortUni, ArrayContainer)
     ASSERT_TRUE(source == sorted);
 }
 
-TEST(InsertSortUni, ListContainer)
+TEST(InsertSortUni, Pointers)
 {
-    std::list<int> source = { 5, 4, 0, 2, -1, 3 };
-    std::list<int> sorted = { -1, 0, 2, 3, 4, 5 };
-    sort_insert_uni(source.begin(), source.end(), cmp<int>);
-    ASSERT_TRUE(source == sorted);
+    int source[] = { 5, 4, 0, 2, -1, 3 };
+    int sorted[] = { -1, 0, 2, 3, 4, 5 };
+    sort_insert_uni(source, source + 6, cmp<int>);
+    bool result = true;
+    for (size_t i = 0; i < 6 && result; i++)
+    {
+        if (source[i] != sorted[i])
+            result = false;
+    }
+    ASSERT_TRUE(result);
 }
