@@ -7,13 +7,13 @@
 /// Сортировка вставками
 
 // Частный
-void sort_insert(std::vector<int> &arr, bool desc=true)
+void sort_insert(std::vector<int> &arr)
 {
     for (size_t i = 0; i < arr.size(); i++)
     {
         int tmp = arr[i];
         int j = i - 1;
-        while (j >= 0 && (desc && tmp < arr[j] || !desc && tmp > arr[j]))
+        while (j >= 0 && tmp < arr[j])
         {
             arr[j + 1] = arr[j];
             arr[j] = tmp;
