@@ -5,17 +5,39 @@
 #include <cstdlib>
 
 /// Сортировка вставками
-void sort_insert(std::vector<int> &arr, bool desc=false)
+
+// Частный
+void sort_insert(std::vector<int> &arr, bool desc=true)
 {
     for (size_t i = 0; i < arr.size(); i++)
     {
         int tmp = arr[i];
         int j = i - 1;
-        while (j >= 0 && (desc && tmp > arr[j] || !desc && tmp < arr[j]))
+        while (j >= 0 && (desc && tmp < arr[j] || !desc && tmp > arr[j]))
         {
             arr[j + 1] = arr[j];
             arr[j] = tmp;
             j--;
+        }
+    }
+}
+
+// Универсальный
+template <class Iter, class Comp>
+void sort_insert_uni(Iter first, Iter last, Comp cmp)
+{
+    if (first == last)
+        return;
+
+    for (Iter _i = first + 1; _i != last; _i++)
+    {
+        auto tmp = *_i;
+        Iter _j = _i - 1;
+        while (_j != first - 1 && cmp(tmp, *_j))
+        {
+            *(_j + 1) = *_j;
+            *_j = tmp;
+            _j--;
         }
     }
 }

@@ -1,32 +1,28 @@
 #include <iostream>
 #include <vector>
 #include <cstdlib>
+#include <iterator>
 
 #include "sort.hpp"
+#include "cmp.hpp"
 
-template <typename  T>
-void input_array(std::vector<T> &arr)
+template <class Iter>
+void input(Iter b, Iter e)
 {
-    for (size_t i = 0; i < arr.size(); i++)
-        std::cin >> arr[i];
+    for (Iter _i = b; _i != e; _i++)
+        std::cin >> *_i;
 }
 
-template <typename T>
-void print_array(std::vector<T> &arr)
+template <class Iter>
+void output(Iter b, Iter e)
 {
-    for (size_t i = 0; i < arr.size(); i++)
-        std::cout << arr[i] << " ";
+    for (Iter _i = b; _i != e; _i++)
+        std::cout << *_i << " ";
     std::cout << std::endl;
 }
 
 int main(int argc, char **argv)
 {
-    if (argc > 1 && std::string(argv[1]) == "--memcheck")
-    {
-        std::vector<int> arr = { 5, 4, 0, 2, -1, 4 };
-        sort_insert(arr);
-        return 0;
-    }
     int n = 0;
     std::cout << "Enter size of array: " << std::endl;
     std::cin >> n;
@@ -36,16 +32,17 @@ int main(int argc, char **argv)
         return 0;
     }
 
-    std::vector<int> arr(n);
+    std::vector<int> arr(n), to_sort(n);
     std::cout << "Enter array: " << std::endl;
-    input_array<int>(arr);
+    input(arr.begin(), arr.end());
     
-    std::cout << "Source array: " << std::endl;
-    print_array<int>(arr);
+    std::cout << std::endl << "Source:\t";
+    output(arr.begin(), arr.end());
 
-    sort_insert(arr);
-    std::cout << "Sorted array: " << std::endl;
-    print_array(arr);
+    std::cout << "Insert:\t";
+    to_sort = arr;
+    sort_insert_uni(to_sort.begin(), to_sort.end(), cmp<int>);
+    output(to_sort.begin(), to_sort.end());
 
     return 0;
 }

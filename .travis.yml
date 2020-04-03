@@ -27,7 +27,8 @@ jobs:
       script: cppcheck --std=c++11 --enable=all -q --error-exitcode=1 .
 
     - stage: memcheck
-      script: cd ${TRAVIS_BRANCH} && chmod +x ./memcheck.sh && ./memcheck.sh
+      script: ./{TRAVIS_BRANCH}/memcheck.exe
+      after_script: make clean
     
     - stage: test
       script: ctest --output-on-failure    
