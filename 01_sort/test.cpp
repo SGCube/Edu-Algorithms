@@ -27,8 +27,8 @@ protected:
     std::vector<float> source_f = { 5.4, -4.2, 0.1, 0, 0.15, 3 };
     std::vector<float> sorted_f = { -4.2, 0, 0.1, 0.15, 3, 5.4 };
 
-    std::array<int, 6> source_a[] = { 5, 4, 0, 2, -1, 4 };
-    std::array<int, 6> sorted_a[] = { -1, 0, 2, 4, 4, 5 };
+    std::array<int, 6> source_a = { 5, 4, 0, 2, -1, 4 };
+    std::array<int, 6> sorted_a = { -1, 0, 2, 4, 4, 5 };
 
     int source_ptr[] = { 5, 4, 0, 2, -1, 4 };
     int sorted_ptr[] = { -1, 0, 2, 4, 4, 5 };
