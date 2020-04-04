@@ -36,35 +36,103 @@ protected:
     
 };
 
-#define SORT_TEST(sort, index) \
+#define SORT_TEST(name, sort, sort_uni) \
+    TEST_F(SortTest, name##_OneElement) \
     { \
-        std::vector<int> to_sort = source[(index)]; \
+        std::vector<int> to_sort = source[0]; \
         (sort)(to_sort); \
-        ASSERT_TRUE(to_sort == sorted[(index)]); \
-    }
-
-#define SORT_TEST_UNI(sort_uni, index) \
+        ASSERT_TRUE(to_sort == sorted[0]); \
+    } \
+    \
+    TEST_F(SortTest, name##_AlreadySorted) \
     { \
-        std::vector<int> to_sort = source[i]; \
+        std::vector<int> to_sort = source[1]; \
+        (sort)(to_sort); \
+        ASSERT_TRUE(to_sort == sorted[1]); \
+    } \
+    \
+    TEST_F(SortTest, name##_InverseSorted) \
+    { \
+        std::vector<int> to_sort = source[2]; \
+        (sort)(to_sort); \
+        ASSERT_TRUE(to_sort == sorted[2]); \
+    } \
+    \
+    TEST_F(SortTest, name##_AllSame) \
+    { \
+        std::vector<int> to_sort = source[3]; \
+        (sort)(to_sort); \
+        ASSERT_TRUE(to_sort == sorted[3]); \
+    } \
+    \
+    TEST_F(SortTest, name##_SomeSame) \
+    { \
+        std::vector<int> to_sort = source[4]; \
+        (sort)(to_sort); \
+        ASSERT_TRUE(to_sort == sorted[4]); \
+    } \
+    \
+    TEST_F(SortTest, name##_NoSame) \
+    { \
+        std::vector<int> to_sort = source[5]; \
+        (sort)(to_sort); \
+        ASSERT_TRUE(to_sort == sorted[5]); \
+    } \
+    \
+    TEST_F(SortTest, name##_OneElement_Uni) \
+    { \
+        std::vector<int> to_sort = source[0]; \
         (sort_uni)(to_sort.begin(), to_sort.end(), cmp<int>); \
-        ASSERT_TRUE(to_sort == sorted[i]); \
-    }
-
-#define SORT_TEST_UNI_F(sort_uni) \
+        ASSERT_TRUE(to_sort == sorted[0]); \
+    } \
+    \
+    TEST_F(SortTest, name##_AlreadySorted_Uni) \
+    { \
+        std::vector<int> to_sort = source[1]; \
+        (sort_uni)(to_sort.begin(), to_sort.end(), cmp<int>); \
+        ASSERT_TRUE(to_sort == sorted[1]); \
+    } \
+    \
+    TEST_F(SortTest, name##_InverseSorted_Uni) \
+    { \
+        std::vector<int> to_sort = source[2]; \
+        (sort_uni)(to_sort.begin(), to_sort.end(), cmp<int>); \
+        ASSERT_TRUE(to_sort == sorted[2]); \
+    } \
+    \
+    TEST_F(SortTest, name##_AllSame_Uni) \
+    { \
+        std::vector<int> to_sort = source[3]; \
+        (sort_uni)(to_sort.begin(), to_sort.end(), cmp<int>); \
+        ASSERT_TRUE(to_sort == sorted[3]); \
+    } \
+    \
+    TEST_F(SortTest, name##_SomeSame_Uni) \
+    { \
+        std::vector<int> to_sort = source[4]; \
+        (sort_uni)(to_sort.begin(), to_sort.end(), cmp<int>); \
+        ASSERT_TRUE(to_sort == sorted[4]); \
+    } \
+    \
+    TEST_F(SortTest, name##_NoSame_Uni) \
+    { \
+        std::vector<int> to_sort = source[5]; \
+        (sort_uni)(to_sort.begin(), to_sort.end(), cmp<int>); \
+        ASSERT_TRUE(to_sort == sorted[5]); \
+    } \
+    TEST_F(SortTest, name##_Float_Uni) \
     { \
         std::vector<float> to_sort_f = source_f; \
         (sort_uni)(to_sort_f.begin(), to_sort_f.end(), cmp<float>); \
         ASSERT_TRUE(to_sort_f == sorted_f); \
-    }
-
-#define SORT_TEST_UNI_ARR(sort_uni) \
+    } \
+    TEST_F(SortTest, name##_StdArray_Uni) \
     { \
         std::array<int, 6> to_sort_a = source_a; \
         (sort_uni)(to_sort_a.begin(), to_sort_a.end(), cmp<int>); \
         ASSERT_TRUE(to_sort_a == sorted_a); \
-    }
-
-#define SORT_TEST_UNI_PTR(sort_uni) \
+    } \
+    TEST_F(SortTest, name##_Array_Uni) \
     { \
         int to_sort_ptr[6]; \
         for (size_t i = 0; i < 6; i++) \
@@ -72,79 +140,6 @@ protected:
         (sort_uni)(to_sort_ptr, to_sort_ptr + 6, cmp<int>); \
         for (size_t i = 0; i < 6; i++) \
             ASSERT_TRUE(to_sort_ptr[i] == sorted_ptr[i]); \
-    }
-
-#define SORT_TESTS(name, sort, sort_uni) \
-    TEST_F(SortInsert, name##_OneElement) \
-    { \
-        SORT_TEST(sort_insert, 0); \
-    } \
-    \
-    TEST_F(SortInsert, name##_AlreadySorted) \
-    { \
-        SORT_TEST(sort_insert, 1); \
-    } \
-    \
-    TEST_F(SortInsert, name##_InverseSorted) \
-    { \
-        SORT_TEST(sort_insert, 2); \
-    } \
-    \
-    TEST_F(SortInsert, name##_AllSame) \
-    { \
-        SORT_TEST(sort_insert, 3); \
-    } \
-    \
-    TEST_F(SortInsert, name##_SomeSame) \
-    { \
-        SORT_TEST(sort_insert, 4); \
-    } \
-    \
-    TEST_F(SortInsert, name##_NoSame) \
-    { \
-        SORT_TEST(sort_insert, 5); \
-    } \
-    \
-    TEST_F(SortInsert, name##_OneElement_Uni) \
-    { \
-        SORT_TEST_UNI(sort_insert_uni, 0); \
-    } \
-    \
-    TEST_F(SortInsert, name##_AlreadySorted_Uni) \
-    { \
-        SORT_TEST_UNI(sort_insert_uni, 1); \
-    } \
-    \
-    TEST_F(SortInsert, name##_InverseSorted_Uni) \
-    { \
-        SORT_TEST_UNI(sort_insert_uni, 2); \
-    } \
-    \
-    TEST_F(SortInsert, name##_AllSame_Uni) \
-    { \
-        SORT_TEST_UNI(sort_insert_uni, 3); \
-    } \
-    \
-    TEST_F(SortInsert, name##_SomeSame_Uni) \
-    { \
-        SORT_TEST_UNI(sort_insert_uni, 4); \
-    } \
-    \
-    TEST_F(SortInsert, name##_NoSame_Uni) \
-    { \
-        SORT_TEST_UNI(sort_insert_uni, 5); \
-    } \
-    TEST_F(SortInsert, name##_Float_Uni) \
-    { \
-        SORT_TEST_UNI_F(sort_insert_uni); \
-    } \
-    TEST_F(SortInsert, name##_StdArray_Uni) \
-    { \
-        SORT_TEST_UNI_ARR(sort_insert_uni); \
-    } \
-    TEST_F(SortInsert, name##_Array_Uni) \
-    { \
-        SORT_TEST_UNI_PTR(sort_insert_uni); \
     }
 
 #endif // __SORT_TEST_HPP__
