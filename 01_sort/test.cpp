@@ -35,7 +35,7 @@ protected:
     
 };
 
-#define SORT_TESTINGING(sort) \
+#define SORT_TESTING(sort) \
     for (size_t i = 0; i < source.size(); i++) \
     { \
         std::vector<int> to_sort = source[i]; \
@@ -43,7 +43,7 @@ protected:
         ASSERT_TRUE(to_sort == sorted[i]); \
     }
 
-#define SORT_TESTINGING_UNI(sort_uni) \
+#define SORT_TESTING_UNI(sort_uni) \
     for (size_t i = 0; i < source.size(); i++) \
     { \
         std::vector<int> to_sort = source[i]; \
