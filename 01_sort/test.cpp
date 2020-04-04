@@ -92,6 +92,16 @@ TEST_F(SortTest, BubbleSortUni)
     SORT_TESTING_UNI(sort_bubble_uni);
 }
 
+TEST_F(SortTest, ShakerSort)
+{
+    SORT_TESTING(sort_shaker);
+}
+
+TEST_F(SortTest, ShakerSortUni)
+{
+    SORT_TESTING_UNI(sort_shaker_uni);
+}
+
 int main(int argc, char **argv)
 {
     testing::InitGoogleTest(&argc, argv);
