@@ -35,7 +35,7 @@ protected:
     
 };
 
-#define SORT_TEST(sort) \
+#define SORT_TESTINGING(sort) \
     for (size_t i = 0; i < source.size(); i++) \
     { \
         std::vector<int> to_sort = source[i]; \
@@ -43,7 +43,7 @@ protected:
         ASSERT_TRUE(to_sort == sorted[i]); \
     }
 
-#define SORT_TEST_UNI(sort_uni) \
+#define SORT_TESTINGING_UNI(sort_uni) \
     for (size_t i = 0; i < source.size(); i++) \
     { \
         std::vector<int> to_sort = source[i]; \
@@ -67,22 +67,22 @@ protected:
 
 TEST_F(SortTest, InsertSort)
 {
-    SORT_TEST(sort_insert);
+    SORT_TESTING(sort_insert);
 }
 
 TEST_F(SortTest, InsertSortUni)
 {
-    SORT_TEST_UNI(sort_insert_uni);
+    SORT_TESTING_UNI(sort_insert_uni);
 }
 
 TEST_F(SortTest, ShellSort)
 {
-    SORT_TEST(sort_shell);
+    SORT_TESTING(sort_shell);
 }
 
 TEST_F(SortTest, ShellSortUni)
 {
-    SORT_TEST_UNI(sort_shell_uni);
+    SORT_TESTING_UNI(sort_shell_uni);
 }
 
 int main(int argc, char **argv)
