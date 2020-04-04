@@ -5,9 +5,6 @@
 class SortTest : public ::testing::Test
 {
 protected:
-	void SetUp() {}
-	void TearDown() {}
-    
 	std::vector<std::vector<int>> source = {
         { 1 },
         { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 },
@@ -83,6 +80,16 @@ TEST_F(SortTest, ShellSort)
 TEST_F(SortTest, ShellSortUni)
 {
     SORT_TESTING_UNI(sort_shell_uni);
+}
+
+TEST_F(SortTest, BubbleSort)
+{
+    SORT_TESTING(sort_bubble);
+}
+
+TEST_F(SortTest, BubbleSortUni)
+{
+    SORT_TESTING_UNI(sort_bubble_uni);
 }
 
 int main(int argc, char **argv)

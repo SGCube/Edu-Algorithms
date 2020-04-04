@@ -6,6 +6,13 @@
 #include "sort.hpp"
 #include "cmp.hpp"
 
+#define MEMCHECK(sort, sort_uni) \
+    to_sort = arr; \
+    (sort)(to_sort); \
+    to_sort = arr; \
+    (sort_uni)(arr.begin(), arr.end(), cmp<int>); \
+    to_sort.clear();
+
 int main(int argc, char **argv)
 {
     srand(time(NULL));
@@ -13,17 +20,13 @@ int main(int argc, char **argv)
     std::vector<int> arr = { 5, 4, 0, 0, 0, 2, -1, 4 };
     std::vector<int> to_sort;
 
-    to_sort = arr;
-    sort_insert(to_sort);
-    to_sort = arr;
-    sort_insert_uni(arr.begin(), arr.end(), cmp<int>);
-    to_sort.clear();
+    MEMCHECK(sort_insert, sort_insert_uni)
 
-    /*to_sort = arr;
-    sort_shell(to_sort);
-    to_sort = arr;
-    sort_shell_uni(arr.begin(), arr.end(), cmp<int>);
-    to_sort.clear();*/
+    MEMCHECK(sort_shell, sort_shell_uni)
+
+    MEMCHECK(sort_bubble, sort_bubble_uni)
+
+    to_sort.clear();
 
     return 0;
 }
