@@ -44,5 +44,10 @@ int main(int argc, char **argv)
     sort_insert_uni(to_sort.begin(), to_sort.end(), cmp<int>);
     output(to_sort.begin(), to_sort.end());
 
+    std::cout << "Shell:\t";
+    to_sort = arr;
+    sort_shell_uni(to_sort.begin(), to_sort.end(), cmp<int>);
+    output(to_sort.begin(), to_sort.end());
+
     return 0;
 }
