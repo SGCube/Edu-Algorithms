@@ -30,13 +30,13 @@ protected:
     std::array<int, 6> source_a = { 5, 4, 0, 2, -1, 4 };
     std::array<int, 6> sorted_a = { -1, 0, 2, 4, 4, 5 };
 
-    int source_ptr[] = { 5, 4, 0, 2, -1, 4 };
-    int sorted_ptr[] = { -1, 0, 2, 4, 4, 5 };
+    int source_ptr[6] = { 5, 4, 0, 2, -1, 4 };
+    int sorted_ptr[6] = { -1, 0, 2, 4, 4, 5 };
     
 };
 
 #define SORT_TEST(sort, sort_uni) \
-    for (auto i = 0; i <= source.size(); i++) \
+    for (size_t i = 0; i < source.size(); i++) \
     { \
         std::vector<int> to_sort = source[i]; \
         (sort)(to_sort); \
