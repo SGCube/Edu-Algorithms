@@ -4,7 +4,7 @@
 #include <vector>
 #include <cstdlib>
 
-/// Сортировка вставками
+/// Сортировка Шелла
 
 // Частный
 void sort_shell(std::vector<int> &arr)
