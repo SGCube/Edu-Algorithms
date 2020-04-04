@@ -5,9 +5,6 @@
 class SortTest : public ::testing::Test
 {
 protected:
-	void SetUp() {}
-	void TearDown() {}
-    
 	std::vector<std::vector<int>> source = {
         { 1 },
         { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 },

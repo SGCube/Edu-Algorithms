@@ -10,7 +10,8 @@
     to_sort = arr; \
     (sort)(to_sort); \
     to_sort = arr; \
-    (sort_uni)(arr.begin(), arr.end(), cmp<int>);
+    (sort_uni)(arr.begin(), arr.end(), cmp<int>); \
+    to_sort.clear();
 
 int main(int argc, char **argv)
 {
